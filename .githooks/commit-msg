@@ -1,0 +1,15 @@
+#!/bin/bash
+
+MSG_FILE=$1
+COMMIT_MSG="$(cat $MSG_FILE)"
+
+# Initialize constants here
+export REGEX='^(ISSUE\[[0-9]+\]+|Merge )'
+export ERROR_MSG="Commit message must contain ISSUE number or Merge ex) ISSUE[00] commit message "
+if [[ $COMMIT_MSG =~ $REGEX ]]; then
+  exit 0
+else
+  echo "Bad commit \"$COMMIT_MSG\""
+  echo $ERROR_MSG
+  exit 1
+fi
